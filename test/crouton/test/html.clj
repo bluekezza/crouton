@@ -37,7 +37,10 @@
     (is (= (parse (stream "<html><body>Foo<!--bar-->Baz</html>"))
            {:tag :html :attrs nil
             :content [{:tag :head :attrs nil :content nil}
-                      {:tag :body :attrs nil :content ["FooBaz"]}]})))
+                      {:tag :body :attrs nil :content ["Foo"
+                                                       {:type :comment
+                                                        :data "bar"}
+                                                       "Baz"]}]})))
   (testing "Doctypes"
     (is (= (parse (stream "<!DOCTYPE html><html></html>"))
            {:tag :html :attrs nil

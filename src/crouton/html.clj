@@ -46,7 +46,9 @@
   (as-clojure [data-node]
     (.getWholeData data-node))
   Comment
-  (as-clojure [comment] nil))
+  (as-clojure [comment]
+    {:type :comment
+     :data (.getData comment)}))
 
 (defn parse
   "Reads and parses the HTML from the supplied source, which map be anything
@@ -60,6 +62,6 @@
       as-clojure))
 
 (defn parse-string
-  "Reads and parses the HTML from a suplied source text."
+  "Reads and parses the HTML from a supplied source text."
   [string]
   (as-clojure (Jsoup/parse string)))
